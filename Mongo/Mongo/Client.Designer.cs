@@ -32,6 +32,9 @@
             this.lblSurname = new System.Windows.Forms.Label();
             this.txForename = new System.Windows.Forms.TextBox();
             this.txSurname = new System.Windows.Forms.TextBox();
+            this.btnPopulate = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblForename
@@ -66,11 +69,44 @@
             this.txSurname.Size = new System.Drawing.Size(100, 20);
             this.txSurname.TabIndex = 5;
             // 
+            // btnPopulate
+            // 
+            this.btnPopulate.Location = new System.Drawing.Point(126, 82);
+            this.btnPopulate.Name = "btnPopulate";
+            this.btnPopulate.Size = new System.Drawing.Size(75, 23);
+            this.btnPopulate.TabIndex = 6;
+            this.btnPopulate.Text = "Populate";
+            this.btnPopulate.UseVisualStyleBackColor = true;
+            this.btnPopulate.Click += new System.EventHandler(this.btnPopulate_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(126, 111);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 7;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(126, 140);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 8;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(228, 104);
+            this.ClientSize = new System.Drawing.Size(217, 179);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnPopulate);
             this.Controls.Add(this.txSurname);
             this.Controls.Add(this.txForename);
             this.Controls.Add(this.lblSurname);
@@ -88,6 +124,9 @@
         private System.Windows.Forms.Label lblSurname;
         private System.Windows.Forms.TextBox txForename;
         private System.Windows.Forms.TextBox txSurname;
+        private System.Windows.Forms.Button btnPopulate;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 
