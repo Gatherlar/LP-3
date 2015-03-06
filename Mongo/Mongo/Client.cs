@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MongoDB.Bson;
@@ -29,16 +30,40 @@ namespace Mongo
 
         private void populateForm()
         {
+            ClientsObj myClients;
 
-            var client = GetClientByID("54c206d91219e78de345718f");
+            if (string.IsNullOrEmpty(txtId.Text))
+            {
+                myClients = GetAllClients();
+            }
+            else
+            {
+                myClients = new ClientsObj();
+                myClients.Add(GetClientByID(txtId.Text));
+            }
+      
 
-            txForename.Text = client.forename;
-            txSurname.Text = client.surname;
+            txForename.Text = myClients[0].forename;
+            txSurname.Text = myClients[0].surname;
+            txtId.Text = myClients[0]._id.ToString();
         }
 
         private void btnPopulate_Click(object sender, System.EventArgs e)
         {
             populateForm();
+        }
+
+        private ClientsObj GetAllClients()
+        {
+            ClientsObj myClients = new ClientsObj();
+            var clients = _clients.FindAllAs<ClientObj>();
+
+            foreach (var client in clients)
+            {
+                myClients.Add(client);
+            }
+
+            return myClients;
         }
 
         private ClientObj GetClientByID(string clientId)
@@ -48,7 +73,7 @@ namespace Mongo
 
         private void btnSave_Click(object sender, System.EventArgs e)
         {
-            var client = GetClientByID("54c206d91219e78de345718f");
+            var client = GetClientByID(txtId.Text);
             client.forename = txForename.Text;
             client.surname = txSurname.Text;
 
@@ -59,6 +84,7 @@ namespace Mongo
         {
             txForename.Text = string.Empty;
             txSurname.Text = string.Empty;
+            txtId.Text = string.Empty;
         }
 
         private void btnCreate_Click(object sender, System.EventArgs e)
@@ -66,9 +92,30 @@ namespace Mongo
             var client = new BsonDocument
             {
                 {"forename", txForename.Text}, 
-                {"surname " ,txSurname.Text}
+                {"surname" ,txSurname.Text}
             };
             _clients.Insert(client);
+        }
+
+        private void btnFindAll_Click(object sender, System.EventArgs e)
+        {
+            ClientsObj myClients;
+
+            myClients = GetAllClients();
+
+
+            txtResults.Text = myClients.ToString();
+        }
+
+        private void btnReset_Click(object sender, System.EventArgs e)
+        {
+            txtResults.Text = String.Empty;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            // To Do
+            //_clients.Remove(Query.EQ("_id", txtId.Text));
         }
 
 
