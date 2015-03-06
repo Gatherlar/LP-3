@@ -35,6 +35,7 @@
             this.btnPopulate = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblForename
@@ -99,11 +100,22 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(12, 82);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(75, 23);
+            this.btnCreate.TabIndex = 9;
+            this.btnCreate.Text = "Create";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(217, 179);
+            this.ClientSize = new System.Drawing.Size(217, 214);
+            this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnPopulate);
@@ -127,6 +139,7 @@
         private System.Windows.Forms.Button btnPopulate;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnCreate;
     }
 }
 

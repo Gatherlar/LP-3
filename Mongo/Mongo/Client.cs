@@ -61,6 +61,16 @@ namespace Mongo
             txSurname.Text = string.Empty;
         }
 
+        private void btnCreate_Click(object sender, System.EventArgs e)
+        {
+            var client = new BsonDocument
+            {
+                {"forename", txForename.Text}, 
+                {"surname " ,txSurname.Text}
+            };
+            _clients.Insert(client);
+        }
+
 
     }
 
