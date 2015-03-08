@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>>Running Moongod & Config files</title>
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    <header>
+        <p class="bigHead">Mongo</p>
+        <p class="subHead">Chris Gathercole/Mat Hayes - Learning Plan 3</p>
+
+    </header>
+
+    <section class="container">
+
+
+
+
+        <div class="row">
+
+            <div class="col-lg-12 col-lg-offset-4">
+                <a href="http://www.mongodb.org/"> <img src="..\images\MongoLogo.png" alt="mongo logo" /> </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <br />
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <h1>Running Moongod & Config files</h1>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <h2>File running</h2> 
+
+                <p>
+                    To automate this a little further we created a little batch file so it easier to start (as you don’t have to keep doing the CD command into program files).
+                    Also, separating out a config file meant that it was easier to understand the parameters and set them out more tidily.
+
+                </p>
+
+
+                <p>
+                    The contexts of the batch file was this...
+
+                </p>
+
+                <p class="output">
+                    cd "C:\Program Files\MongoDB 2.6 Standard\bin\"
+                    mongod -f C:\GitHub\Survivor\SL\DeployFiles\Config\mongodb.conf
+                    pause
+                </p>
+
+                The -f parameter allows you to supply a Config file, and the pause allows you to see what happens if an error occurs (otherwise the cmd window disappears!)
+
+            </div>
+
+            <div class="col-lg-6">
+                <h2>Config file</h2>
+                <p>
+                    The config file allows lots of other things but to keep things simple
+                    I simply put the path of the database in using the ‘dbpath’ parameter
+                    
+                </p>
+
+                <p class="output">
+
+                    dbpath = C:\GitHub\Survivor\SL\DeployFiles\DB
+
+                </p>
+                <p>
+                    Then I ensure I understood which port I was using (you can change this if you wish but the default is 27017) using the ‘port’
+                    
+                </p>
+
+                <p class="output">
+
+                    port = 27017
+                </p>
+
+                <p>
+                    Mongo writes lots of text to this and also creates a new text file every time the service is started. So the next parameter is the ‘logpath’ which gives us control of where the log is written to. Combine this with ‘logappend’ which means there is only file and it just continues to be written to.
+                    
+                </p>
+                <p class="output">
+
+                    logpath = C:\GitHub\Survivor\SL\DeployFiles\DB\mongo.log
+                    logappend = true
+
+                </p>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12">
+
+            </div>
+        </div>
+
+    </section>
+
+    <div class="navbar navbar-fixed-bottom">
+        <div class="container">
+            <p class="navbar-text">CG/MH - 2015</p>
+        </div>
+
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="../css/Examples.css" rel="stylesheet" />
+
+</body>
+</html>
+
+

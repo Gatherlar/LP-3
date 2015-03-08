@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>>Running Moongod & Config files</title>
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <p class="bigHead">Mongo</p>
+        <p class="subHead">Chris Gathercole/Mat Hayes - Learning Plan 3</p>
+
+    </header>
+
+    <section class="container">
+
+
+
+
+        <div class="row">
+
+            <div class="col-lg-12 col-lg-offset-4">
+                <a href="http://www.mongodb.org/"> <img src="..\images\MongoLogo.png" alt="mongo logo" /> </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <br />
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1>Starting and Stopping the Mongo Service In Code</h1>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <h2>Introduction</h2>
+
+                <p>
+                    So, the first thing that was quite annoying was the fact that if you close this command prompt window your mongod service will stop running.
+
+                </p>
+                I found that running this in a local application and having a command prompt popping up would be a little annoying.
+                <p>
+
+                </p>
+                Also, when you start and stop your application if you were using a batch file you would also have multiple instances of the ‘mongod’ service running.
+
+                <p>
+                    In this section we discuss how to run ‘mongod’ as a service, and also demonstrate an implementation.
+
+                </p>
+
+
+
+            </div>
+
+            <div class="col-lg-6">
+                <h2>More Batch Files</h2>
+
+
+                <p>
+                    So, I created a Batchfile which has the following in it
+                </p>
+                <p class="output">
+
+                    cd "C:\Program Files\MongoDB 2.6 Standard\bin\"
+                    <br />mongod -f "C:\GitHub\Survivor\SL\DeployFiles\Config\mongodb.conf" -install
+                    <br />-serviceName mdb27017
+                    <br />-serviceDisplayName "MongoDB Server Instance 27017"
+                    <br />-serviceDescription "MongoDB Server Instance running on 27017"
+                    <br />pause
+                </p>
+
+                <p>
+
+                    It basically executes the config file and installs it as a service.
+                    <br/>
+                     Then from the code I wrote the following to execute the script
+                    </p>
+                        
+                <p class="output">
+
+                    System.Diagnostics.Process.Start(“InstallMongo.bat);
+                </p>
+                <p>
+                    Similarly I wrote a start & stop batch file and executed that the same way. The code was pretty straight forward.
+
+                </p>
+                <p class="output">
+
+                    net start mdb27017 / net stop mdb27017
+
+                </p>
+
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12">
+
+            </div>
+        </div>
+
+    </section>
+
+    <div class="navbar navbar-fixed-bottom">
+        <div class="container">
+            <p class="navbar-text">CG/MH - 2015</p>
+        </div>
+
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="../css/Examples.css" rel="stylesheet" />
+
+</body>
+</html>
+
+

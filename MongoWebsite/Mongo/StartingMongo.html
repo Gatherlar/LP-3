@@ -39,15 +39,52 @@
 
             <div class="col-lg-12">
 
-                <h4>Starting Mongo</h4>
+                <h1>Starting Mongo</h1>
+            </div>
+            <div class="col-lg-6">
 
-                Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text
+                <h2>Introduction</h2>
+                <p>
+                    Once installed you can then start the ‘Mongod’ service through the command prompt
+                </p>
+
+                <p>
+                    To do this manually you can simply run ‘mongod.exe’ from the cmd prompt. 
+                </p>
+                <p>
+                    
+                    The default path for this is c:\Data\DB (if it doesn’t exist it won’t start.).
+
+                <p>
+                    If like us you don’t want to use this path, you can always supply the –dbpath parameter.
+
+                </p>
+                <p class="output">
+                    mogod --dbpath c:\MongoDBPath
+
+                </p>
 
             </div>
+            <div class="col-lg-6">
 
+
+
+                <h2>Its Running...! .. Is it?</h2>
+
+                <p>
+                    When it starts, it’s pretty underwhelming and almost difficult to know if it’s failed or not...
+                </p>
+                <p>
+                    However as long as the last thing it says is “waiting for connections on port 27017” you should be ok.
+                </p>
+
+
+                <img src="../images/MongodStartup.png" />
+            </div>
 
         </div>
 
+      
     </section>
 
     <div class="navbar navbar-fixed-bottom">
