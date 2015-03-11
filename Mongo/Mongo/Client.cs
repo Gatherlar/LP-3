@@ -114,8 +114,9 @@ namespace Mongo
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            // To Do
-            //_clients.Remove(Query.EQ("_id", txtId.Text));
+            var id = ObjectId.Parse(txtId.Text);
+            var query = Query.EQ("_id", id);
+            _clients.Remove(query); 
         }
 
 
