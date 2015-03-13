@@ -36,14 +36,16 @@
             this.btnPopulate = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.gbxCarer = new System.Windows.Forms.GroupBox();
-            this.gbxCarers = new System.Windows.Forms.GroupBox();
-            this.lblId = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFindID = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
+            this.lblId = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.gbxCarers = new System.Windows.Forms.GroupBox();
+            this.txtResults = new System.Windows.Forms.TextBox();
             this.btnFindAll = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
-            this.txtResults = new System.Windows.Forms.TextBox();
             this.gbxCarer.SuspendLayout();
             this.gbxCarers.SuspendLayout();
             this.SuspendLayout();
@@ -82,19 +84,19 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(153, 136);
+            this.btnSave.Location = new System.Drawing.Point(101, 107);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(63, 23);
             this.btnSave.TabIndex = 9;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "Update";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnPopulate
             // 
-            this.btnPopulate.Location = new System.Drawing.Point(153, 107);
+            this.btnPopulate.Location = new System.Drawing.Point(175, 193);
             this.btnPopulate.Name = "btnPopulate";
-            this.btnPopulate.Size = new System.Drawing.Size(75, 23);
+            this.btnPopulate.Size = new System.Drawing.Size(63, 23);
             this.btnPopulate.TabIndex = 8;
             this.btnPopulate.Text = "Populate";
             this.btnPopulate.UseVisualStyleBackColor = true;
@@ -102,9 +104,9 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(91, 183);
+            this.btnClear.Location = new System.Drawing.Point(101, 136);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(63, 23);
             this.btnClear.TabIndex = 10;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -112,13 +114,15 @@
             // 
             // gbxCarer
             // 
+            this.gbxCarer.Controls.Add(this.label1);
+            this.gbxCarer.Controls.Add(this.txtFindID);
+            this.gbxCarer.Controls.Add(this.btnPopulate);
             this.gbxCarer.Controls.Add(this.btnDelete);
             this.gbxCarer.Controls.Add(this.btnCreate);
             this.gbxCarer.Controls.Add(this.lblId);
             this.gbxCarer.Controls.Add(this.txtId);
             this.gbxCarer.Controls.Add(this.btnClear);
             this.gbxCarer.Controls.Add(this.btnSave);
-            this.gbxCarer.Controls.Add(this.btnPopulate);
             this.gbxCarer.Controls.Add(this.lblSurname);
             this.gbxCarer.Controls.Add(this.txtSurname);
             this.gbxCarer.Controls.Add(this.lblForename);
@@ -129,6 +133,59 @@
             this.gbxCarer.TabIndex = 11;
             this.gbxCarer.TabStop = false;
             this.gbxCarer.Text = "Carer";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 168);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Find Id:";
+            // 
+            // txtFindID
+            // 
+            this.txtFindID.Location = new System.Drawing.Point(80, 165);
+            this.txtFindID.Name = "txtFindID";
+            this.txtFindID.Size = new System.Drawing.Size(148, 20);
+            this.txtFindID.TabIndex = 16;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(175, 107);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(63, 23);
+            this.btnDelete.TabIndex = 15;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(25, 107);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(63, 23);
+            this.btnCreate.TabIndex = 14;
+            this.btnCreate.Text = "Create";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
+            // lblId
+            // 
+            this.lblId.AutoSize = true;
+            this.lblId.Location = new System.Drawing.Point(22, 22);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(19, 13);
+            this.lblId.TabIndex = 13;
+            this.lblId.Text = "Id:";
+            // 
+            // txtId
+            // 
+            this.txtId.Enabled = false;
+            this.txtId.Location = new System.Drawing.Point(80, 19);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(148, 20);
+            this.txtId.TabIndex = 12;
             // 
             // gbxCarers
             // 
@@ -142,39 +199,14 @@
             this.gbxCarers.TabStop = false;
             this.gbxCarers.Text = "Carers";
             // 
-            // lblId
+            // txtResults
             // 
-            this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(22, 22);
-            this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(19, 13);
-            this.lblId.TabIndex = 13;
-            this.lblId.Text = "Id:";
-            // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(80, 19);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(148, 20);
-            this.txtId.TabIndex = 12;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(25, 136);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 15;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnCreate
-            // 
-            this.btnCreate.Location = new System.Drawing.Point(25, 107);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(75, 23);
-            this.btnCreate.TabIndex = 14;
-            this.btnCreate.Text = "Create";
-            this.btnCreate.UseVisualStyleBackColor = true;
+            this.txtResults.Location = new System.Drawing.Point(24, 51);
+            this.txtResults.Multiline = true;
+            this.txtResults.Name = "txtResults";
+            this.txtResults.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtResults.Size = new System.Drawing.Size(290, 161);
+            this.txtResults.TabIndex = 14;
             // 
             // btnFindAll
             // 
@@ -184,6 +216,7 @@
             this.btnFindAll.TabIndex = 13;
             this.btnFindAll.Text = "Find All";
             this.btnFindAll.UseVisualStyleBackColor = true;
+            this.btnFindAll.Click += new System.EventHandler(this.btnFindAll_Click);
             // 
             // btnReset
             // 
@@ -193,15 +226,6 @@
             this.btnReset.TabIndex = 12;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
-            // 
-            // txtResults
-            // 
-            this.txtResults.Location = new System.Drawing.Point(24, 51);
-            this.txtResults.Multiline = true;
-            this.txtResults.Name = "txtResults";
-            this.txtResults.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResults.Size = new System.Drawing.Size(290, 161);
-            this.txtResults.TabIndex = 14;
             // 
             // Carer
             // 
@@ -238,5 +262,7 @@
         private System.Windows.Forms.Button btnFindAll;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.TextBox txtResults;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtFindID;
     }
 }

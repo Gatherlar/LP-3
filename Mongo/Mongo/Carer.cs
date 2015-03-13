@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace Mongo
 {
@@ -18,7 +19,7 @@ namespace Mongo
         private MongoClient _mongo;
         private MongoServer _server;
         private MongoDatabase _database;
-        private MongoCollection _carers;
+        private MongoCollection<CarerObj> _carers;
 
         public Carer()
         {
@@ -27,7 +28,8 @@ namespace Mongo
             _mongo = new MongoClient();
             _server = _mongo.GetServer();
             _database = _server.GetDatabase("CMdb");
-            _carers = _database.GetCollection("Carers");
+            // Using generics here means that we dont not need to use "find as" when accessing data in the collection
+            _carers = _database.GetCollection<CarerObj> ("Carers");
         }
 
         private void btnPopulate_Click(object sender, EventArgs e)
@@ -38,21 +40,22 @@ namespace Mongo
         private void populateForm()
         {
 
-            var carer = GetCarerByID("54c2060e1219e78de345718e");
+            var carer = GetCarerByID(txtFindID.Text.Trim());
 
-            txtForename.Text = carer.forename;
+            txtForename.Text = carer.Carerforename;
             txtSurname.Text = carer.surname;
+            txtId.Text = carer.CarerID;
         }
 
         public CarerObj GetCarerByID(string carerId)
         {
-            return _carers.FindOneByIdAs<CarerObj>(ObjectId.Parse(carerId));
+            return _carers.FindOneById(ObjectId.Parse(carerId));
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var carer = GetCarerByID("54c2060e1219e78de345718e");
-            carer.forename = txtForename.Text;
+            var carer = GetCarerByID(txtId.Text);
+            carer.Carerforename = txtForename.Text;
             carer.surname = txtSurname.Text;
 
             _carers.Save(carer);
@@ -63,12 +66,44 @@ namespace Mongo
             txtForename.Text = string.Empty;
             txtSurname.Text = string.Empty;
         }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            CarerObj carer = new CarerObj();
+            carer.Carerforename = txtForename.Text;
+            carer.surname = txtSurname.Text;
+            _carers.Insert(carer);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var id = ObjectId.Parse(txtId.Text);
+            var query = Query.EQ("_id", id);
+            _carers.Remove(query); 
+        }
+
+        private void btnFindAll_Click(object sender, EventArgs e)
+        {
+            txtResults.Text = GetAllCarers().ToString();
+        }
+
+        private CarerObjs GetAllCarers()
+        {
+            // Finds in mongo return cursors
+            // Cursors do not return data until the individual intem in the cursor is used
+            // Each iteration of the cursor below is getting the data from mongo as Mongo.CarerObj and maps to CarerObj so it can be added to carerObjs
+
+            CarerObjs Carers = new CarerObjs();
+            var CarersFound = _carers.FindAll();
+            foreach (var carer in CarersFound)
+            {
+                Carers.Add(carer);
+            }
+            return Carers;
+        }
+
+
     }
 
-    public class CarerObj
-    {
-        public ObjectId _id;
-        public string forename;
-        public string surname;
-    }
+
 }

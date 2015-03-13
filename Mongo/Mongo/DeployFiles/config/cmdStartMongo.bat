@@ -1,4 +1,5 @@
-cd "C:\Program Files\MongoDB 2.6 Standard\bin\"
-mongod -f C:\GitHub\Survivor\SL\DeployFiles\Config\mongodb.conf
+cd "C:\Program Files\MongoDB\Server\3.0\bin" 
+
+mongod -f C:\GitHub\LP-3\Mongo\Mongo\DeployFiles\config\mongodb.conf
 
 pause
