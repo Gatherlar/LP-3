@@ -45,8 +45,9 @@ h3 {
 }   
 
 .output {
-    color: #14bca5;
-    font-size: 1.3em;
+    color: #17897a;
+    font-size: 1.1em;
+    font-weight: bolder;
 }
 
 thead {

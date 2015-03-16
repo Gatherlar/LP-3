@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>>Running Moongod & Config files</title>
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <p class="bigHead">Mongo</p>
+        <p class="subHead">Chris Gathercole/Mat Hayes - Learning Plan 3</p>
+
+    </header>
+
+    <section class="container">
+
+
+
+
+        <div class="row">
+
+            <div class="col-lg-12 col-lg-offset-4">
+                <a href="http://www.mongodb.org/"> <img src="..\images\MongoLogo.png" alt="mongo logo" /> </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <br />
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1>Data Retrieval- Mongo Collection</h1>
+                <p>
+                    This section looks at coding the Find methods.
+                    To start with we will look at the MongoCollection class to actually make the calls. Quickly describe ‘Cursors’ and how they differ from a usual ADO implementation.
+                    And then finally go through how mapping the data from the document gets directly into the classes you have made.
+                </p>
+                <p>
+                    A MongoCollection object is essentially the object you use to get data back. It’s a generic type and you add the Class type in the definition. This class has a 3 types of find:
+                </p>
+                <ul>
+                    <li>
+                        <b>FindAll</b>  which simply fills the cursor with all results from a document
+                    </li>
+                    <li>
+                        <b>Find</b> which takes search criteria
+                    </li>
+                    <li>
+                        <b>FindOne</b> which always returns one result even if more than one record is found (the first logically stored one)
+                    </li>
+                </ul>
+
+                <p>
+                    When you use Find the MongoCollection returns a Cursor which isn’t actually the data, it’s a pointer to it. Its only when you access the data items is the data actually brought back. The data is then mapped directrly for you to use.
+                </p>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Class Definition</h3>
+
+                <p>
+                    The properties defined here must match <u>exactly</u>     how the fields are defined in the document and the mapping will work. If this does not happen, an error will occur.
+                </p>
+                <h3>Example</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>
+                    First a simple Class called Carer.
+                </p>
+                <p class="output">
+                    public class Carer<br />
+                    {<br />
+                    public ObjectId _id;<br />
+                    public string forename;<br />
+                    public string surname;<br />
+                    }<br />
+                </p>                    
+            </div>
+            <div class="col-sm-6">
+
+                <p>
+                    Then define a MongoCollection with the Carer passed in:
+                </p>
+                <p class="output">
+                    private MongoCollection &lt; carer &gt; _carer;
+                </p>
+                
+                <p>
+                    The definition here with the generic of Carer then maps the cursor and its results directly to the class.
+                    This means each document returned will be of type Carer.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Using FindOneByID</h3>
+
+                <p>
+                    This method will always return the first physically added document back. 
+                    Although it seems odd, i have needed this in the past where i simply just want one record.
+                    <br/><br/>
+
+                    To use the FindOneByID the object is realised immediately and populates the CarerObject
+                </p>
+                <p class="output">
+                    public Carer GetCarerByID(string carerId)<br/>
+                    {<br/>
+                    return _carers.FindOneById(carerId);<br/>
+                    }<br/>
+
+                </p>
+
+
+            </div>
+            <div class="col-sm-6">
+                <h3>Using Find / FindAll</h3>
+
+                <p>
+                    When using the Find where more than one result is returned the cursor 
+                    is more obvious. 
+                    You cannot simply take the cursor returned and place it in a C# collection 
+                    class such as a list object, you must loop through and place each returned 
+                    item (which is of the correct type) into a List collection of that type.                     
+                    <br /><br />
+                </p>
+                <p class="output">
+                    private CarerObjs GetAllCarers()<br />
+                    {<br />
+                    CarerObjs Carers = new CarerObjs();<br />
+                    var CarersFound = _carers.FindAll();<br />
+                    foreach (var carer in CarersFound)<br />
+                    {<br />
+                    Carers.Add(carer);<br />
+                    }<br />
+                    return Carers;<br />
+                    }<br/>
+
+
+                </p>
+                <p>
+                    So just to describe, the CarersFound object is actually of type MongoCursor, and then when you look 
+                    in the class using the foreach the object is then realised. 
+                </p>
+
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Decorating/Mapping other libraries</h3>
+
+                <p>
+                    It might be possible that some other class needs to be mapped without accessing the class directly.For example, it might not be my library file to change. 
+                    So, there is also a ClassMap object which allows the class to be decorated on initialisation like this.
+                </p>
+                <h3>Example</h3>
+
+                <p class="output">
+                    BsonClassMap.RegisterClassMap&lt;myclass&gt; <br/>
+                        (cm =&gt; { <br />
+                        cm.MapProperty(c =&gt; c.SomeProperty); <br />
+                        cm.MapProperty(c =&gt; c.AnotherProperty); <br />
+                        }); 
+                   
+                </p>
+                <p>
+                    For more information on this <a href="http://docs.mongodb.org/ecosystem/tutorial/serialize-documents-with-the-csharp-driver/">here</a> is a useful resource.
+                </p>
+
+</div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <br /><br /><br /><br /><br /><br />
+            </div>
+        </div>
+
+    </section>
+
+    <div class="navbar navbar-fixed-bottom">
+        <div class="container">
+            <p class="navbar-text">CG/MH - 2015</p>
+        </div>
+
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="../css/Examples.css" rel="stylesheet" />
+
+</body>
+</html>
+
+
