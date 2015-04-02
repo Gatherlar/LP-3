@@ -68,6 +68,8 @@
     <Compile Include="ClientsObj.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisitObj.cs" />
+    <Compile Include="VisitsObj.cs" />
     <EmbeddedResource Include="Carer.resx">
       <DependentUpon>Carer.cs</DependentUpon>
     </EmbeddedResource>

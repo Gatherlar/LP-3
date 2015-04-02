@@ -78,23 +78,23 @@
                 <p>
                     First a simple Class called Carer.
                 </p>
-                <p class="output">
-                    public class Carer<br />
-                    {<br />
-                    public ObjectId _id;<br />
-                    public string forename;<br />
-                    public string surname;<br />
-                    }<br />
-                </p>                    
+                <pre class="output">
+    public class Carer
+    {
+        public ObjectId _id;
+        public string forename;
+        public string surname;
+    }
+                </pre>                    
             </div>
             <div class="col-sm-6">
 
                 <p>
                     Then define a MongoCollection with the Carer passed in:
                 </p>
-                <p class="output">
-                    private MongoCollection &lt; carer &gt; _carer;
-                </p>
+                <pre class="output">
+    private MongoCollection &lt;carer&gt; _carer;
+                </pre>
                 
                 <p>
                     The definition here with the generic of Carer then maps the cursor and its results directly to the class.
@@ -113,13 +113,13 @@
 
                     To use the FindOneByID the object is realised immediately and populates the CarerObject
                 </p>
-                <p class="output">
-                    public Carer GetCarerByID(string carerId)<br/>
-                    {<br/>
-                    return _carers.FindOneById(carerId);<br/>
-                    }<br/>
+                <pre class="output">
+public Carer GetCarerByID(string carerId)
+{
+    return _carers.FindOneById(carerId);
+}
 
-                </p>
+                </pre>
 
 
             </div>
@@ -134,20 +134,20 @@
                     item (which is of the correct type) into a List collection of that type.                     
                     <br /><br />
                 </p>
-                <p class="output">
-                    private CarerObjs GetAllCarers()<br />
-                    {<br />
-                    CarerObjs Carers = new CarerObjs();<br />
-                    var CarersFound = _carers.FindAll();<br />
-                    foreach (var carer in CarersFound)<br />
-                    {<br />
-                    Carers.Add(carer);<br />
-                    }<br />
-                    return Carers;<br />
-                    }<br/>
+                <pre class="output">
+private CarerObjs GetAllCarers()
+{
+    CarerObjs Carers = new CarerObjs();
+    var CarersFound = _carers.FindAll();
+    foreach (var carer in CarersFound)
+    {
+        Carers.Add(carer);
+    }
+    return Carers;
+    }
 
 
-                </p>
+                </pre>
                 <p>
                     So just to describe, the CarersFound object is actually of type MongoCursor, and then when you look 
                     in the class using the foreach the object is then realised. 
@@ -166,14 +166,13 @@
                 </p>
                 <h3>Example</h3>
 
-                <p class="output">
-                    BsonClassMap.RegisterClassMap&lt;myclass&gt; <br/>
-                        (cm =&gt; { <br />
-                        cm.MapProperty(c =&gt; c.SomeProperty); <br />
-                        cm.MapProperty(c =&gt; c.AnotherProperty); <br />
-                        }); 
-                   
-                </p>
+                <pre class="output">
+BsonClassMap.RegisterClassMap&lt;myclass&gt; 
+(cm =&gt; { 
+        cm.MapProperty(c =&gt; c.SomeProperty); 
+        cm.MapProperty(c =&gt; c.AnotherProperty); 
+});                   
+                </pre>
                 <p>
                     For more information on this <a href="http://docs.mongodb.org/ecosystem/tutorial/serialize-documents-with-the-csharp-driver/">here</a> is a useful resource.
                 </p>
