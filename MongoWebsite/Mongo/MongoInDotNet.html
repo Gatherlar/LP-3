@@ -37,16 +37,66 @@
 
         <div class="row">
 
-            <div class="col-lg-12">
+                <div class="row">
 
-                <h4>Using Mongo in .Net</h4>
+                    <div class="col-lg-12">
+                        <h1>Initialising Mongo in .Net</h1>
+                        <p>
+                            This section looks at using Mongo within .net applications.
+                        </p>
+                        <p>
+                            
+                           In order to use Mongo Nuget will need to be used to get the Mongo .Net drivers and add a reference to the project. The key objects part of the .Net Mongo driver are: 
+                        </p>
+                        <ul>
+                            <li>
+                                <b>MongoClient</b> is the root object to handle connecting to the database
+                            </li>
+                            <li>
+                                <b>MongoServer</b> gets an instance of the MongoDB server
+                            </li>
+                            <li>
+                                <b>MongoDatabase</b> represents a database on a MongoDB server
+                            </li>
+                            <li>
+                                <b>MongoCollection&lt;T&gt; </b> represents a collection in a MongoDB database
+                            </li>
+                        </ul>
+                        
+                        <p>The following code snippet will establish a connection pool to the "CMdb" database leaving it ready to start pulling data out of collections. If the database does not exist then it will be created on first use (same applies for the collection):</p>
+                        
+                        <pre class="output">
+    public class Carer
+    {
+        private MongoClient _mongo;
+        private MongoServer _server;
+        private MongoDatabase _database;
+        private MongoCollection&lt;carerobj&gt; _carers;
+        
+        public Carer()
+        {
+            _mongo = new MongoClient();
+            _server = _mongo.GetServer();
+            _database = _server.GetDatabase("CMdb");
+            _carers = _database.GetCollection&lt;carerobj&gt; ("carers");
+        }
+    }
+                        </pre>
 
-                Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text
+                    </div>
+           
 
-            </div>
+                <div class="row">
 
+                    <div class="col-lg-12">
+                        <br /><br /><br /><br /><br /><br />
+                    </div>
+                </div>
 
-        </div>
+ 
+
+    </div>
+
 
     </section>
 
