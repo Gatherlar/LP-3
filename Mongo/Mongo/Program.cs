@@ -16,7 +16,7 @@ namespace Mongo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Carer());
+            Application.Run(new Home());
         }
     }
 }

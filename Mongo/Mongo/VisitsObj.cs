@@ -16,7 +16,7 @@ namespace Mongo
         private MongoCollection<VisitObj> _visit;
 
 
-        public VisitObj(string visitID)
+        public void VisitObj(string visitID)
         {
             _mongo = new MongoClient();
             _server = _mongo.GetServer();
